@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Friends Poker</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Lobby: create or join a table -->
+    <main id="lobbyScreen" class="lobby">
+      <div class="lobby-card">
+        <div class="logo">
+          <span class="logo-suits">♠ <span class="red">♥</span> ♣ <span class="red">♦</span></span>
+          <h1>Friends Poker</h1>
+          <p>Texas Hold'em with play chips. No sign-up.</p>
+        </div>
+
+        <label class="field">
+          <span>Your name</span>
+          <input id="nameInput" type="text" maxlength="14" autocomplete="nickname" placeholder="e.g. Alex" />
+        </label>
+
+        <section id="invitePanel" hidden>
+          <p class="invite-text">You are invited to table <strong id="inviteRoomCode"></strong></p>
+          <button id="joinInviteButton" class="button primary wide">Join table</button>
+          <button id="ignoreInviteButton" class="button link wide">Create my own table instead</button>
+        </section>
+
+        <section id="createJoinPanel">
+          <div class="field-row">
+            <label class="field">
+              <span>Starting chips</span>
+              <input id="startingChipsInput" type="number" min="100" max="1000000" step="100" value="1000" />
+            </label>
+            <label class="field">
+              <span>Big blind</span>
+              <input id="bigBlindInput" type="number" min="2" step="2" value="20" />
+            </label>
+          </div>
+          <button id="createButton" class="button primary wide">Create table</button>
+
+          <div class="divider"><span>or join with a code</span></div>
+
+          <div class="join-row">
+            <input id="roomCodeInput" type="text" maxlength="6" placeholder="ABCDEF" autocapitalize="characters" />
+            <button id="joinButton" class="button secondary">Join</button>
+          </div>
+        </section>
+
+        <p id="lobbyError" class="error-text" role="alert"></p>
+      </div>
+    </main>
+
+    <!-- Game table -->
+    <main id="tableScreen" class="table-screen" hidden>
+      <header class="top-bar">
+        <div class="top-bar-group">
+          <span class="room-label">Table <strong id="roomCodeLabel"></strong></span>
+          <button id="copyLinkButton" class="button small secondary">Copy invite link</button>
+        </div>
+        <div class="top-bar-group">
+          <span id="blindsLabel" class="blinds-label"></span>
+          <button id="leaveButton" class="button small ghost">Leave</button>
+        </div>
+      </header>
+
+      <div class="table-area">
+        <div id="pokerTable" class="poker-table">
+          <div class="felt">
+            <div class="table-center">
+              <div id="potLabel" class="pot-label"></div>
+              <div id="communityCards" class="community-cards"></div>
+              <div id="resultBanner" class="result-banner" hidden></div>
+              <div id="centerMessage" class="center-message"></div>
+            </div>
+          </div>
+          <div id="seatLayer" class="seat-layer"></div>
+        </div>
+      </div>
+
+      <footer id="actionBar" class="action-bar"></footer>
+      <div id="toast" class="toast" role="alert" hidden></div>
+    </main>
+
+    <script src="/client.js"></script>
+  </body>
+</html>
